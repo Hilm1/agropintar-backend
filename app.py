@@ -330,9 +330,9 @@ def chat():
         if resp.status_code==200:
             answer=resp.json()['candidates'][0]['content']['parts'][0]['text'].strip()
             if answer: return jsonify({'answer':answer}),200
-    except Exception as e:
-        return jsonify({'answer':"DEBUG ERROR: "+str(e)}),200
-    return jsonify({'answer':"DEBUG: status "+str(resp.status_code)+" body "+resp.text[:300]}),200
+    except Exception:
+        pass
+    return jsonify({'answer':"Sorry, I could not process that just now. Please try again in a moment."}),200
 
 with app.app_context():
     db.create_all()
